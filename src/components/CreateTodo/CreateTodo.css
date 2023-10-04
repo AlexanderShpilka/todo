@@ -1,0 +1,36 @@
+.create-todo-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.input {
+    height: 56px;
+    padding: 15px 10px;
+    border: 2px solid black;
+    border-radius: 6px;
+    font-size: 18px;
+
+    margin-bottom: 24px;
+}
+
+.add-todo-button {
+    min-height: 56px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    text-transform: uppercase;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+@media (min-width: 768px) {
+    .create-todo-container {
+        flex-direction: row;
+    }
+
+    .input {
+        flex-grow: 1;
+        margin-right: 20px;
+        margin-bottom: 0;
+    }
+}
