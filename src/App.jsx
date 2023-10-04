@@ -1,13 +1,16 @@
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { CreateTodo } from './components/CreateTodo';
 import { TodoItem } from './components/TodoItem';
 import { Filter } from './components/Filter';
-import { filterConfig, FILTER_VALUES } from './config/filter';
+import { filterConfig, FILTER_VALUES, TODOS_LOCAL_STORAGE_KEY } from './config';
 import styles from './App.module.css';
 
 function App() {
-  const [todos, setTodos] = useState([]);
+  const [todos, setTodos] = useState(() => {
+    const savedTodos = localStorage.getItem(TODOS_LOCAL_STORAGE_KEY);
+    return savedTodos ? JSON.parse(savedTodos) : [];
+  });
   const [todoStatus, setTodoStatus] = useState(FILTER_VALUES.ALL);
 
   const addTodo = useCallback((title) => {
@@ -82,6 +85,10 @@ function App() {
         return todos;
     }
   }, [todoStatus, todos]);
+
+  useEffect(() => {
+    localStorage.setItem(TODOS_LOCAL_STORAGE_KEY, JSON.stringify(todos));
+  }, [todos]);
 
   return (
     <div className={styles.container}>

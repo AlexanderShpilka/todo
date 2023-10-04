@@ -9,3 +9,5 @@ export const filterConfig = [
   { value: FILTER_VALUES.ACTIVE, label: 'Active' },
   { value: FILTER_VALUES.COMPLETED, label: 'Completed' },
 ];
+
+export const TODOS_LOCAL_STORAGE_KEY = 'todos';
