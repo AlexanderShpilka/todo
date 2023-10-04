@@ -1,10 +1,16 @@
 import styles from './TodoItem.module.css';
 
-export const TodoItem = ({ title, completed, className }) => {
+export const TodoItem = ({ title, completed, className, onTodoToggle }) => {
   return (
-    <div className={`${styles.container} ${className ? className : ''}`}>
+    <div
+      className={`${styles.container} ${completed ? styles.completed : ''} ${
+        className ? className : ''
+      }`}
+    >
       <div className={styles.drag}>m</div>
-      <p className={styles.title}>{title}</p>
+      <p className={styles.title} onClick={onTodoToggle}>
+        {title}
+      </p>
       <div className={styles.actions}>
         <button>u</button>
         <button>x</button>

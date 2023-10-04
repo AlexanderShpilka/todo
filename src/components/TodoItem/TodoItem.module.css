@@ -18,9 +18,14 @@
     margin: 0;
     border-right: 1px solid #ccc;
     border-left: 1px solid #ccc;
+    cursor: pointer;
 }
 
 .actions {
     display: flex;
     justify-content: space-evenly;
+}
+
+.completed {
+    opacity: 0.5;
 }
