@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { CreateTodo } from './components/CreateTodo';
 import { TodoItem } from './components/TodoItem';
@@ -90,6 +90,30 @@ function App() {
     localStorage.setItem(TODOS_LOCAL_STORAGE_KEY, JSON.stringify(todos));
   }, [todos]);
 
+  const draggedTodoRef = useRef(null);
+  const draggedOverTodoRef = useRef(null);
+
+  const onDragStart = useCallback((index) => {
+    return () => {
+      draggedTodoRef.current = index;
+    };
+  }, []);
+
+  const onDragEnter = useCallback((index) => {
+    return () => {
+      draggedOverTodoRef.current = index;
+    };
+  }, []);
+
+  const onDragEnd = useCallback(() => {
+    let updatedTodos = [...todos];
+    const [draggedTodo] = updatedTodos.splice(draggedTodoRef.current, 1);
+    updatedTodos.splice(draggedOverTodoRef.current, 0, draggedTodo);
+    draggedTodoRef.current = null;
+    draggedOverTodoRef.current = null;
+    setTodos(updatedTodos);
+  }, [todos]);
+
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>Todos</h1>
@@ -99,16 +123,24 @@ function App() {
         options={filterConfig}
         onFilterChange={handleTodoStatusFilterChange}
       />
-      {filteredTodos.map((todo) => (
-        <TodoItem
+      {filteredTodos.map((todo, index) => (
+        <div
           key={todo.id}
-          title={todo.title}
-          completed={todo.completed}
-          className={styles.todoItem}
-          onTodoToggle={toggleTodo(todo.id)}
-          onTodoDelete={deleteTodo(todo.id)}
-          onTodoUpdate={updateTodo(todo.id)}
-        />
+          draggable
+          onDragStart={onDragStart(index)}
+          onDragEnter={onDragEnter(index)}
+          onDragEnd={onDragEnd}
+          onDragOver={(event) => event.preventDefault()}
+        >
+          <TodoItem
+            title={todo.title}
+            completed={todo.completed}
+            className={styles.todoItem}
+            onTodoToggle={toggleTodo(todo.id)}
+            onTodoDelete={deleteTodo(todo.id)}
+            onTodoUpdate={updateTodo(todo.id)}
+          />
+        </div>
       ))}
     </div>
   );
