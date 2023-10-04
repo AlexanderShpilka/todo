@@ -11,6 +11,9 @@ function App() {
   const [todoStatus, setTodoStatus] = useState(FILTER_VALUES.ALL);
 
   const addTodo = useCallback((title) => {
+    if (!title.trim()) {
+      return;
+    }
     const newTodo = {
       id: uuidv4(),
       title,
