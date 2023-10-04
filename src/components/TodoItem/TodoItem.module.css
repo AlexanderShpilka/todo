@@ -30,6 +30,11 @@
     opacity: 0.5;
 }
 
+.completed .title {
+    font-style: italic;
+    text-decoration: line-through;
+}
+
 .modal {
     position: absolute;
     top: 0;
@@ -76,6 +81,14 @@
     text-transform: uppercase;
     font-size: 18px;
     font-weight: bold;
+    cursor: pointer;
+}
+
+.todoItemButton {
+    padding: 10px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
 }
 
 @media (min-width: 768px) {

@@ -1,5 +1,6 @@
-import styles from './TodoItem.module.css';
 import { useCallback, useState } from 'react';
+import { MenuOutlined, EditOutlined, DeleteOutlined } from '@ant-design/icons';
+import styles from './TodoItem.module.css';
 
 export const TodoItem = ({
   title,
@@ -37,13 +38,19 @@ export const TodoItem = ({
           className ? className : ''
         }`}
       >
-        <div className={styles.drag}>m</div>
+        <div className={styles.drag}>
+          <MenuOutlined />
+        </div>
         <p className={styles.title} onClick={onTodoToggle}>
           {title}
         </p>
         <div className={styles.actions}>
-          <button onClick={toggleEditMode}>u</button>
-          <button onClick={onTodoDelete}>x</button>
+          <button onClick={toggleEditMode} className={styles.todoItemButton}>
+            <EditOutlined />
+          </button>
+          <button onClick={onTodoDelete} className={styles.todoItemButton}>
+            <DeleteOutlined />
+          </button>
         </div>
       </div>
 
