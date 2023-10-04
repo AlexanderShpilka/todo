@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { MenuOutlined, EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import styles from './TodoItem.module.css';
 
@@ -12,6 +12,8 @@ export const TodoItem = ({
 }) => {
   const [editMode, setEditMode] = useState(false);
   const [newTitle, setNewTitle] = useState(title);
+
+  const inputRef = useRef();
 
   const handleNewTitleChange = useCallback((event) => {
     setNewTitle(event.target.value);
@@ -39,6 +41,7 @@ export const TodoItem = ({
     };
     if (editMode) {
       document.addEventListener('keydown', handleEscapeKeyDown);
+      inputRef.current.focus();
     }
     return () => {
       document.removeEventListener('keydown', handleEscapeKeyDown);
@@ -78,6 +81,7 @@ export const TodoItem = ({
                 value={newTitle}
                 onChange={handleNewTitleChange}
                 className={styles.input}
+                ref={inputRef}
               />
               <div className={styles.modalActions}>
                 <button onClick={handleModalCancel} className={styles.modalButton} type='button'>
