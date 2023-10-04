@@ -1,11 +1,14 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { CreateTodo } from './components/CreateTodo';
 import { TodoItem } from './components/TodoItem';
+import { Filter } from './components/Filter';
+import { filterConfig, FILTER_VALUES } from './config/filter';
 import styles from './App.module.css';
 
 function App() {
   const [todos, setTodos] = useState([]);
+  const [todoStatus, setTodoStatus] = useState(FILTER_VALUES.ALL);
 
   const addTodo = useCallback((title) => {
     const newTodo = {
@@ -62,11 +65,31 @@ function App() {
     [todos],
   );
 
+  const handleTodoStatusFilterChange = useCallback((event) => {
+    setTodoStatus(event.target.value);
+  }, []);
+
+  const filteredTodos = useMemo(() => {
+    switch (todoStatus) {
+      case FILTER_VALUES.ACTIVE:
+        return todos.filter((todo) => !todo.completed);
+      case FILTER_VALUES.COMPLETED:
+        return todos.filter((todo) => todo.completed);
+      default:
+        return todos;
+    }
+  }, [todoStatus, todos]);
+
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>Todos</h1>
       <CreateTodo onTodoCreate={addTodo} className={styles.createTodo} />
-      {todos.map((todo) => (
+      <Filter
+        className={styles.filter}
+        options={filterConfig}
+        onFilterChange={handleTodoStatusFilterChange}
+      />
+      {filteredTodos.map((todo) => (
         <TodoItem
           key={todo.id}
           title={todo.title}
