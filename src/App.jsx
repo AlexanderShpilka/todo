@@ -44,6 +44,24 @@ function App() {
     [todos],
   );
 
+  const updateTodo = useCallback(
+    (todoId) => {
+      return (newTitle) => {
+        const updatedTodos = todos.map((todo) => {
+          if (todo.id === todoId) {
+            return {
+              ...todo,
+              title: newTitle,
+            };
+          }
+          return todo;
+        });
+        setTodos(updatedTodos);
+      };
+    },
+    [todos],
+  );
+
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>Todos</h1>
@@ -56,6 +74,7 @@ function App() {
           className={styles.todoItem}
           onTodoToggle={toggleTodo(todo.id)}
           onTodoDelete={deleteTodo(todo.id)}
+          onTodoUpdate={updateTodo(todo.id)}
         />
       ))}
     </div>
