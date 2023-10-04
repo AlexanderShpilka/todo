@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { MenuOutlined, EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import styles from './TodoItem.module.css';
 
@@ -30,6 +30,20 @@ export const TodoItem = ({
     setEditMode(false);
     onTodoUpdate(newTitle);
   }, [newTitle, onTodoUpdate]);
+
+  useEffect(() => {
+    const handleEscapeKeyDown = (event) => {
+      if (event.key === 'Escape') {
+        handleModalCancel();
+      }
+    };
+    if (editMode) {
+      document.addEventListener('keydown', handleEscapeKeyDown);
+    }
+    return () => {
+      document.removeEventListener('keydown', handleEscapeKeyDown);
+    };
+  }, [editMode, handleModalCancel]);
 
   return (
     <>
