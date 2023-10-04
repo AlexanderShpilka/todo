@@ -1,4 +1,4 @@
-.create-todo-container {
+.container {
     display: flex;
     flex-direction: column;
 }
@@ -13,7 +13,7 @@
     margin-bottom: 24px;
 }
 
-.add-todo-button {
+.addButton {
     min-height: 56px;
     padding: 10px 20px;
     border: none;
@@ -24,7 +24,7 @@
 }
 
 @media (min-width: 768px) {
-    .create-todo-container {
+    .container {
         flex-direction: row;
     }
 

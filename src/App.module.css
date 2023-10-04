@@ -1,18 +1,26 @@
-.app-container {
+.container {
   padding: 20px;
-  max-width: 600px;
+  max-width: 800px;
   margin-right: auto;
   margin-left: auto;
 }
 
-.app-title {
+.title {
   font-size: 32px;
   text-align: center;
   text-transform: uppercase;
 }
 
+.createTodo {
+  margin-bottom: 60px;
+}
+
+.todoItem {
+  margin-bottom: 16px;
+}
+
 @media (min-width: 768px) {
-  .app-title {
+  .title {
     font-size: 48px;
   }
 }

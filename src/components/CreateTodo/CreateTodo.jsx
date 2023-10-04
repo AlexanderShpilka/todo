@@ -1,7 +1,7 @@
 import { useCallback, useState } from 'react';
-import './CreateTodo.css';
+import styles from './CreateTodo.module.css';
 
-export const CreateTodo = ({ onTodoCreate }) => {
+export const CreateTodo = ({ onTodoCreate, className }) => {
   const [todoTitle, setTodoTitle] = useState('');
 
   const handleTodoTitleChange = useCallback((event) => {
@@ -15,15 +15,15 @@ export const CreateTodo = ({ onTodoCreate }) => {
   };
 
   return (
-    <form onSubmit={handleAddTodo} className='create-todo-container'>
+    <form onSubmit={handleAddTodo} className={`${styles.container} ${className ? className : ''}`}>
       <input
         type='text'
         value={todoTitle}
         onChange={handleTodoTitleChange}
         placeholder="What's next?"
-        className='input'
+        className={styles.input}
       />
-      <button className='add-todo-button'>Add</button>
+      <button className={styles.addButton}>Add</button>
     </form>
   );
 };

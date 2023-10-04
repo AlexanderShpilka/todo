@@ -1,0 +1,26 @@
+.container {
+    display: grid;
+    grid-template-columns: 1fr 6fr 2fr;
+    border: 1px solid #ccc;
+    align-items: center;
+}
+
+.drag {
+    align-self: stretch;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: move;
+}
+
+.title {
+    padding: 20px;
+    margin: 0;
+    border-right: 1px solid #ccc;
+    border-left: 1px solid #ccc;
+}
+
+.actions {
+    display: flex;
+    justify-content: space-evenly;
+}
