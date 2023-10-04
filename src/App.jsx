@@ -34,6 +34,16 @@ function App() {
     [todos],
   );
 
+  const deleteTodo = useCallback(
+    (todoId) => {
+      return () => {
+        const updatedTodos = todos.filter((todo) => todo.id !== todoId);
+        setTodos(updatedTodos);
+      };
+    },
+    [todos],
+  );
+
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>Todos</h1>
@@ -45,6 +55,7 @@ function App() {
           completed={todo.completed}
           className={styles.todoItem}
           onTodoToggle={toggleTodo(todo.id)}
+          onTodoDelete={deleteTodo(todo.id)}
         />
       ))}
     </div>

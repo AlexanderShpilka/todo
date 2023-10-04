@@ -1,6 +1,6 @@
 import styles from './TodoItem.module.css';
 
-export const TodoItem = ({ title, completed, className, onTodoToggle }) => {
+export const TodoItem = ({ title, completed, className, onTodoToggle, onTodoDelete }) => {
   return (
     <div
       className={`${styles.container} ${completed ? styles.completed : ''} ${
@@ -13,7 +13,7 @@ export const TodoItem = ({ title, completed, className, onTodoToggle }) => {
       </p>
       <div className={styles.actions}>
         <button>u</button>
-        <button>x</button>
+        <button onClick={onTodoDelete}>x</button>
       </div>
     </div>
   );
