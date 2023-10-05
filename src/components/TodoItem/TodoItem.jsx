@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { MenuOutlined, EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import { Input } from '../Input';
 import { Button } from '../Button';
+import { Modal } from '../Modal';
 import styles from './TodoItem.module.css';
 
 export const TodoItem = ({
@@ -74,29 +75,26 @@ export const TodoItem = ({
       </div>
 
       {editMode && (
-        <>
-          <div className={styles.modal} onClick={handleModalCancel} />
-          <div className={styles.modalContent}>
-            <form onSubmit={handleModalAccept}>
-              <Input
-                type='text'
-                value={newTitle}
-                onChange={handleNewTitleChange}
-                className={styles.input}
-                ref={inputRef}
+        <Modal onBackgroundClick={handleModalCancel}>
+          <form onSubmit={handleModalAccept}>
+            <Input
+              type='text'
+              value={newTitle}
+              onChange={handleNewTitleChange}
+              className={styles.input}
+              ref={inputRef}
+            />
+            <div className={styles.modalActions}>
+              <Button
+                text='Cancel'
+                className={styles.modalButton}
+                type='button'
+                onClick={handleModalCancel}
               />
-              <div className={styles.modalActions}>
-                <Button
-                  text='Cancel'
-                  className={styles.modalButton}
-                  type='button'
-                  onClick={handleModalCancel}
-                />
-                <Button text='Save' className={styles.modalButton} type='submit' />
-              </div>
-            </form>
-          </div>
-        </>
+              <Button text='Save' className={styles.modalButton} type='submit' />
+            </div>
+          </form>
+        </Modal>
       )}
     </>
   );
