@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { MenuOutlined, EditOutlined, DeleteOutlined } from '@ant-design/icons';
+import { Input } from '../Input';
 import { Button } from '../Button';
 import styles from './TodoItem.module.css';
 
@@ -77,7 +78,7 @@ export const TodoItem = ({
           <div className={styles.modal} onClick={handleModalCancel} />
           <div className={styles.modalContent}>
             <form onSubmit={handleModalAccept}>
-              <input
+              <Input
                 type='text'
                 value={newTitle}
                 onChange={handleNewTitleChange}

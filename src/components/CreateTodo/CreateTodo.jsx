@@ -1,4 +1,5 @@
 import { useCallback, useState } from 'react';
+import { Input } from '../Input';
 import { Button } from '../Button';
 import styles from './CreateTodo.module.css';
 
@@ -17,7 +18,7 @@ export const CreateTodo = ({ onTodoCreate, className }) => {
 
   return (
     <form onSubmit={handleAddTodo} className={`${styles.container} ${className ? className : ''}`}>
-      <input
+      <Input
         type='text'
         value={todoTitle}
         onChange={handleTodoTitleChange}
