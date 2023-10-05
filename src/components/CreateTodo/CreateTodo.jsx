@@ -1,10 +1,13 @@
 import { useCallback, useState } from 'react';
 import { Input } from '../Input';
 import { Button } from '../Button';
+import { useFocus } from '../../hooks/useFocus';
 import styles from './CreateTodo.module.css';
 
 export const CreateTodo = ({ onTodoCreate, className }) => {
   const [todoTitle, setTodoTitle] = useState('');
+
+  const focusedElRef = useFocus();
 
   const handleTodoTitleChange = useCallback((event) => {
     setTodoTitle(event.target.value);
@@ -24,6 +27,7 @@ export const CreateTodo = ({ onTodoCreate, className }) => {
         onChange={handleTodoTitleChange}
         placeholder="What's next?"
         className={styles.input}
+        ref={focusedElRef}
       />
       <Button text='Add' />
     </form>
