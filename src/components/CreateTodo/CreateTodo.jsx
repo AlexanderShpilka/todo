@@ -1,4 +1,5 @@
 import { useCallback, useState } from 'react';
+import { Button } from '../Button';
 import styles from './CreateTodo.module.css';
 
 export const CreateTodo = ({ onTodoCreate, className }) => {
@@ -23,7 +24,7 @@ export const CreateTodo = ({ onTodoCreate, className }) => {
         placeholder="What's next?"
         className={styles.input}
       />
-      <button className={styles.addButton}>Add</button>
+      <Button text='Add' />
     </form>
   );
 };

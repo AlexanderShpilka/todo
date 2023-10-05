@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { MenuOutlined, EditOutlined, DeleteOutlined } from '@ant-design/icons';
+import { Button } from '../Button';
 import styles from './TodoItem.module.css';
 
 export const TodoItem = ({
@@ -84,12 +85,13 @@ export const TodoItem = ({
                 ref={inputRef}
               />
               <div className={styles.modalActions}>
-                <button onClick={handleModalCancel} className={styles.modalButton} type='button'>
-                  Cancel
-                </button>
-                <button className={styles.modalButton} type='submit'>
-                  Save
-                </button>
+                <Button
+                  text='Cancel'
+                  className={styles.modalButton}
+                  type='button'
+                  onClick={handleModalCancel}
+                />
+                <Button text='Save' className={styles.modalButton} type='submit' />
               </div>
             </form>
           </div>
